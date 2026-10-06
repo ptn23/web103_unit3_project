@@ -55,3 +55,12 @@
     padding: 10px;
     text-align: center;
 }
+.event-information.passed {
+    opacity: 0.6;
+    text-decoration: line-through;
+    filter: grayscale(80%);
+}
+
+.event-information.passed h3 {
+    text-decoration: line-through;
+}

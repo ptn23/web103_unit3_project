@@ -2,34 +2,22 @@ import React from 'react'
 import { useRoutes, Link } from 'react-router-dom'
 import Locations from './pages/Locations'
 import LocationEvents from './pages/LocationEvents'
-import Events from './pages/Events'
+import Event from './components/Event'
 import './App.css'
 
 const App = () => {
-  let element = useRoutes([
+let element = useRoutes([
     {
       path: '/',
       element: <Locations />
     },
     {
-      path: '/echolounge',
-      element: <LocationEvents index={1} />
-    },
-    {
-      path: '/houseofblues',
-      element: <LocationEvents index={2} />
-    },
-    {
-      path: '/pavilion',
-      element: <LocationEvents index={3} />
-    },
-    {
-      path: '/americanairlines',
-      element: <LocationEvents index={4} />
+      path: '/locations/:id',
+      element: <LocationEvents />
     },
     {
       path: '/events',
-      element: <Events />
+      element: <Event />
     }
   ])
 

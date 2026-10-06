@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from "react-router-dom";
 import Event from '../components/Event'
+import LocationsAPI from '../services/LocationsAPI'
+import EventsAPI from '../services/EventsAPI'
 import '../css/LocationEvents.css'
-
 const LocationEvents = ({index}) => {
     const [location, setLocation] = useState([])
     const [events, setEvents] = useState([])
+    const { id } = useParams()
+    useEffect(() => {
+        const fetchLocationData = async () => {
+            try{
+                const locationData = await LocationsAPI.getLocationById(id)
+                setLocation(locationData)
 
+                const allEvents = await EventsAPI.getAllEvents()
+                const matchingEvents = allEvents.filter(event => event.location_id === Number(id))
+                setEvents(matchingEvents)
+            }
+            catch(error){
+                console.error("Error fetching location events:", error)
+            }
+        }
+        fetchLocationData();
+    }, [id])
     return (
         <div className='location-events'>
             <header>
